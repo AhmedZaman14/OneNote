@@ -32,9 +32,9 @@ namespace OneNote
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OneNote OneNote = new OneNote();
+            Administrator administrator = new Administrator();
             this.Hide();
-            OneNote.ShowDialog();
+            administrator.ShowDialog();
             this.Close();
         }
     }

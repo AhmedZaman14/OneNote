@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administrator.Designer.cs">
+      <DependentUpon>Administrator.cs</DependentUpon>
+    </Compile>
     <Compile Include="NoteLayout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsersInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersInfo.Designer.cs">
+      <DependentUpon>UsersInfo.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Administrator.resx">
+      <DependentUpon>Administrator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NoteLayout.resx">
       <DependentUpon>NoteLayout.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +139,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UsersInfo.resx">
+      <DependentUpon>UsersInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -160,6 +178,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\three-dots.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\statistics-1857.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sidepanel.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mmmm.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dash.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recycle-bin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ba.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
