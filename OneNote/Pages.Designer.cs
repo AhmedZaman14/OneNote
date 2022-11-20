@@ -35,10 +35,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -53,6 +53,7 @@
             this.label3.Size = new System.Drawing.Size(41, 17);
             this.label3.TabIndex = 11;
             this.label3.Text = "Pages";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label1
             // 
@@ -84,6 +85,7 @@
             this.label6.Size = new System.Drawing.Size(46, 15);
             this.label6.TabIndex = 14;
             this.label6.Text = "EXTRAS";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -105,6 +107,31 @@
             this.label4.Size = new System.Drawing.Size(42, 15);
             this.label4.TabIndex = 12;
             this.label4.Text = "TODO:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label11.Location = new System.Drawing.Point(-5, 562);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(265, 13);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "___________________________________________";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Purple;
+            this.label10.Location = new System.Drawing.Point(7, 580);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(77, 19);
+            this.label10.TabIndex = 36;
+            this.label10.Text = "+       Page";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // pictureBox3
             // 
@@ -126,30 +153,7 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label11.Location = new System.Drawing.Point(-7, 565);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(265, 13);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "___________________________________________";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Purple;
-            this.label10.Location = new System.Drawing.Point(7, 582);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 19);
-            this.label10.TabIndex = 36;
-            this.label10.Text = "+       Page";
-            // 
-            // Education
+            // Pages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -166,7 +170,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Education";
+            this.Name = "Pages";
             this.Text = "OneNote";
             this.Load += new System.EventHandler(this.Education_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

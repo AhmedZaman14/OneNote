@@ -103,6 +103,16 @@ namespace OneNote.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap marker {
+            get {
+                object obj = ResourceManager.GetObject("marker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap panel {
             get {
                 object obj = ResourceManager.GetObject("panel", resourceCulture);
@@ -116,6 +126,16 @@ namespace OneNote.Properties {
         internal static System.Drawing.Bitmap profile_pic__3_ {
             get {
                 object obj = ResourceManager.GetObject("profile-pic (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap three_dots {
+            get {
+                object obj = ResourceManager.GetObject("three-dots", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

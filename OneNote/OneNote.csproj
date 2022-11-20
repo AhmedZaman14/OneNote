@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NoteLayout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NoteLayout.Designer.cs">
+      <DependentUpon>NoteLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Notes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Notes.Designer.cs">
+      <DependentUpon>Notes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +93,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="NoteLayout.resx">
+      <DependentUpon>NoteLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notes.resx">
+      <DependentUpon>Notes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages.resx">
       <DependentUpon>Pages.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\green.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\three-dots.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
