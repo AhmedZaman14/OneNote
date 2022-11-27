@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace OneNote
 {
 
     public partial class OneNote : Form
     {
+
+        public String notebookName;
         public OneNote()
         {
             InitializeComponent();
 
-            
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -47,15 +41,37 @@ namespace OneNote
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            Sections sections = new Sections();
-            this.Hide();
+            var sections = new Sections();
             sections.ShowDialog();
-            this.Close();
+
+        }
+
+
+
+
+
+        private void OneNote_Load(object sender, EventArgs e)
+        {
+            //here u will do this 
+            // lorem's NoteBook Text should change into usrs's name Notebook on the OneNote Form:
+            //Now first retreive the email of the User from database
+            // and then add that NoteBook Name and user_id to the NoteBook table.
+
+            //All done on the login.cs 
+            //here write how u did it 
+
+
+
+
+            
+            //labelNoteBook.BackColor= Color.Black;
+            labelNoteBook.Text = notebookName + "'s NoteBook";
+
         }
     }
 

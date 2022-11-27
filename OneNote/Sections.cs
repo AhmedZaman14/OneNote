@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OneNote
@@ -19,9 +12,7 @@ namespace OneNote
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            OneNote onenoteform = new OneNote();
-            this.Hide();
-            onenoteform.ShowDialog();
+            //so that back icon is clicked the user go back to the same OneNote Form:
             this.Close();
         }
 

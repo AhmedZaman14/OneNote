@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OneNote
@@ -40,7 +33,7 @@ namespace OneNote
 
         private void label4_Click(object sender, EventArgs e)
         {
-            Notes note= new Notes();
+            Notes note = new Notes();
             this.Hide();
             note.ShowDialog();
             this.Close();

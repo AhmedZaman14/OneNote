@@ -33,16 +33,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelNoteBook = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.ovalPictureBox1 = new OvalPictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -68,7 +68,7 @@
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.labelNoteBook);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
             this.tabPage1.Font = new System.Drawing.Font("MV Boli", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -104,17 +104,17 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Default";
             // 
-            // label1
+            // labelNoteBook
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MV Boli", 11F);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(46, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Lorem\'s NoteBook";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.labelNoteBook.AutoSize = true;
+            this.labelNoteBook.Font = new System.Drawing.Font("MV Boli", 11F);
+            this.labelNoteBook.ForeColor = System.Drawing.Color.Black;
+            this.labelNoteBook.Location = new System.Drawing.Point(46, 10);
+            this.labelNoteBook.Name = "labelNoteBook";
+            this.labelNoteBook.Size = new System.Drawing.Size(135, 20);
+            this.labelNoteBook.TabIndex = 1;
+            this.labelNoteBook.Text = "Lorem\'s NoteBook";
+            this.labelNoteBook.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox1
             // 
@@ -159,6 +159,29 @@
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Green;
+            this.button1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(76, 51);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 29);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Search";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(10, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(241, 23);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "Search for Notes";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -189,29 +212,6 @@
             this.ovalPictureBox1.TabIndex = 2;
             this.ovalPictureBox1.TabStop = false;
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(10, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(241, 23);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "Search for Notes";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Green;
-            this.button1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(76, 51);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 29);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Search";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // OneNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +226,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OneNote";
             this.Text = "OneNote";
+            this.Load += new System.EventHandler(this.OneNote_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -247,7 +248,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelNoteBook;
         private System.Windows.Forms.Label label2;
         private OvalPictureBox ovalPictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
