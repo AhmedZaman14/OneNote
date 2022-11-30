@@ -16,9 +16,39 @@ namespace OneNote
         {
 
         }
+        //to add data into the User(NotebookId)
+        private void set_NoteBookID_in_Userr(String email)
+        {
+            SqlConnection sqlCon = new SqlConnection();
+            sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
+            sqlCon.Open();
+            // first save the user_id into a variable(userid==notebookid always i guess)
+            SqlCommand sqlCommand = new SqlCommand("Select Notebookid from [Notebook] where email = '" + email + "' ", sqlCon);
+            int NotebookID = (int)sqlCommand.ExecuteScalar();
+
+
+            String queryOneNote = "update [User] set NotebookId = '" + NotebookID + "' where email = '" + email + "'";
+            SqlCommand sqlCommand2 = new SqlCommand(queryOneNote, sqlCon);
+            sqlCommand2.Connection = sqlCon;
+            sqlCommand2.CommandType = CommandType.Text;
+            int b = sqlCommand2.ExecuteNonQuery();
+            if (b != -1)
+            {
+                Console.Write("data added to Useer(NotebookId) Successfully:");
+
+            }
+            else
+            {
+                Console.Write("Error in set_noteBookId ");
+            }
+
+        }
+    
+
 
         private Boolean check_existing_email(String email)
         {
+
             //chech if the email entered already exists in database or not?
             SqlConnection sqlCon = new SqlConnection();
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
@@ -42,15 +72,18 @@ namespace OneNote
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
+
             //make user account and check if the email already exists or not
             SqlConnection sqlCon = new SqlConnection();
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
             sqlCon.Open();
 
-            String firstname = textBox1.Text;
-            String lastname = textBox2.Text;
-            String email = textBox3.Text;
-            String password = textBox4.Text;
+            String firstname = textBox1.Text.Trim();
+            String lastname = textBox2.Text.Trim();
+            String email = textBox3.Text.Trim();
+            String password = textBox4.Text.Trim();
 
             if (textBox3.Text.Contains(" "))
             {
@@ -72,6 +105,7 @@ namespace OneNote
                 }
                 else
                 {
+
                     String query = "insert into [User](name,lastname,email,password)" +
                    " values('" + firstname + "','" + lastname + "','" + email + "', '" + password + "')";
 
@@ -81,6 +115,7 @@ namespace OneNote
                     int a = sqlCommand.ExecuteNonQuery();
                     if (a != -1)
                     {
+                        ////adding count for userid so that it will also be used in setting notebookid
                         MessageBox.Show("Account Created Successfully:");
                         LogIn login = new LogIn();
                         this.Hide();
@@ -92,10 +127,11 @@ namespace OneNote
                         MessageBox.Show("Error: Account can not be created");
                     }
 
-                    //Now add the firstname and user_id to the OneNote table
-                    // first save the user_id into a variable
+                    //Now add the firstname to the OneNote table
+                    
 
-                    add_data_to_NoteBookTable(firstname, email);
+                    add_data_to_NoteBookTable(firstname, email,sqlCon);
+                    
 
                 }
 
@@ -106,44 +142,33 @@ namespace OneNote
         }
 
         //method to add the add the data into the NoteBook Table
-        private void add_data_to_NoteBookTable(String firstname, String email)
+        private void add_data_to_NoteBookTable(String firstname, String email, SqlConnection sqlCon)
         {
-            SqlConnection sqlCon = new SqlConnection();
-            sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
-            sqlCon.Open();
-            // first save the user_id into a variable
-            SqlCommand sqlCommand = new SqlCommand("Select user_id from [User] where email = '" + email + "' ", sqlCon);
-            int user_id = (int)sqlCommand.ExecuteScalar();
+          
+         
 
-            if (user_id >= 0)
+            String queryOneNote = "insert into NoteBook(name,email) values('" + firstname + "' ,'"+email+"')";
+            SqlCommand sqlCommand2 = new SqlCommand(queryOneNote, sqlCon);
+            sqlCommand2.Connection = sqlCon;
+            sqlCommand2.CommandType = CommandType.Text;
+            int b = sqlCommand2.ExecuteNonQuery();
+            if (b != -1)
             {
-                String queryOneNote = "insert into NoteBook(name,user_id) values('" + firstname + "', '" + user_id + "')";
-                SqlCommand sqlCommand2 = new SqlCommand(queryOneNote, sqlCon);
-                sqlCommand2.Connection = sqlCon;
-                sqlCommand2.CommandType = CommandType.Text;
-                int b = sqlCommand2.ExecuteNonQuery();
-                if (b != -1)
-                {
-                    MessageBox.Show("data added to NoteBook Successfully:");
-                    LogIn login = new LogIn();
-                    this.Hide();
-                    login.ShowDialog();
-                    this.Close();
-                }
-                else
-                {
-                    Console.Write("Error in signup class buton1 ");
-                }
-
+                set_NoteBookID_in_Userr(email);
+                Console.Write("data added to NoteBook Successfully:");
             }
             else
             {
-                Console.Write("Error in signup class buton1 ");
+                MessageBox.Show("Error in signup class buton1---add_data_toNotebookmethod ");
             }
+
         }
+
+
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
+
 
         }
     }

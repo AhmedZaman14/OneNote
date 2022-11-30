@@ -47,6 +47,7 @@ namespace OneNote
         private void label1_Click(object sender, EventArgs e)
         {
             var sections = new Sections();
+            sections.heading= notebookName;
             sections.ShowDialog();
 
         }
@@ -71,6 +72,15 @@ namespace OneNote
             
             //labelNoteBook.BackColor= Color.Black;
             labelNoteBook.Text = notebookName + "'s NoteBook";
+
+        }
+
+        private void ovalPictureBox1_Click(object sender, EventArgs e)
+        {
+            LogIn login = new LogIn();
+            this.Hide();
+            login.ShowDialog();
+            this.Close();
 
         }
     }

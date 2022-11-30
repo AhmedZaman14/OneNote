@@ -14,7 +14,7 @@ namespace OneNote
 
         private void LogIn_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -25,14 +25,12 @@ namespace OneNote
             this.Close();
         }
 
-        private Boolean check_Account_existance(String email)
+        private Boolean check_Account_existance(String email,SqlConnection sqlConnection)
         {
             //chech if the email entered already exists in database or not?
-            SqlConnection sqlCon = new SqlConnection();
-            sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
-            sqlCon.Open();
+            
 
-            SqlCommand sqlCommand = new SqlCommand("Select email from [User] where email = '" + email + "' ", sqlCon);
+            SqlCommand sqlCommand = new SqlCommand("Select email from [User] where email = '" + email + "' ",sqlConnection);
             String em_check = (string)sqlCommand.ExecuteScalar();
             if (em_check != null)
             {
@@ -48,13 +46,10 @@ namespace OneNote
             }
         }
 
-        private Boolean check_password(String email, String pass)
+        private Boolean check_password(String email, String pass,SqlConnection sqlCon)
         {
             //check if the entered password for that email is correct
-            SqlConnection sqlCon = new SqlConnection();
-            sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
-            sqlCon.Open();
-
+            
             SqlCommand sqlCommand = new SqlCommand("Select password from [User] where email = '" + email + "' ", sqlCon);
             String pass_chech = (string)sqlCommand.ExecuteScalar();
             if (pass_chech != null)
@@ -77,11 +72,9 @@ namespace OneNote
         }
 
         private String throw_NoteBookName = "";
-        private String getUserName(String email)
+        private String getUserName(String email,SqlConnection sqlCon)
         {
-            SqlConnection sqlCon = new SqlConnection();
-            sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
-            sqlCon.Open();
+           
 
             String query = "Select [name] from [User] where email = '" + email + "' ";
             SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
@@ -117,10 +110,10 @@ namespace OneNote
                 sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
                 sqlCon.Open();
 
-                if (check_Account_existance(email) == true)
+                if (check_Account_existance(email,sqlCon) == true)
                 {
                     //now check if the passwor entered for this email is correct.
-                    if (check_password(email, pass) == true)
+                    if (check_password(email, pass,sqlCon) == true)
                     {
                         //done
                         //now user will be directed to the main page of application 
@@ -128,14 +121,14 @@ namespace OneNote
 
                         String throw_email = email;
 
-                        throw_NoteBookName = getUserName(throw_email);
-
+                        throw_NoteBookName = getUserName(throw_email,sqlCon);
+                        
                         OneNote one = new OneNote();
                         this.Hide();
                         one.notebookName = throw_NoteBookName;
                         one.ShowDialog();
                         this.Close();
-
+                        
                     }
 
                 }

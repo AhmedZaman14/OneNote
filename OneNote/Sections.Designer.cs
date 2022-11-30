@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sections));
-            this.label1 = new System.Windows.Forms.Label();
+            this.label1heading = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,15 +49,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // label1heading
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.label1.Location = new System.Drawing.Point(41, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 22);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Lorem\'s NoteBook";
+            this.label1heading.AutoSize = true;
+            this.label1heading.Font = new System.Drawing.Font("Calibri", 13F);
+            this.label1heading.Location = new System.Drawing.Point(41, 27);
+            this.label1heading.Name = "label1heading";
+            this.label1heading.Size = new System.Drawing.Size(147, 22);
+            this.label1heading.TabIndex = 1;
+            this.label1heading.Text = "Lorem\'s NoteBook";
             // 
             // label2
             // 
@@ -87,9 +87,9 @@
             this.label4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(30, 86);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 15);
+            this.label4.Size = new System.Drawing.Size(95, 15);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Education";
+            this.label4.Text = "Education/Work";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
@@ -189,12 +189,13 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label1heading);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Sections";
             this.Text = "OneNote";
+            this.Load += new System.EventHandler(this.Sections_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -209,7 +210,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label1heading;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label2;
