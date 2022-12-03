@@ -5,6 +5,7 @@ namespace OneNote
 {
     public partial class Sections : Form
     {
+        public int NOTEBOOKID;
         public Sections()
         {
             InitializeComponent();
@@ -20,6 +21,7 @@ namespace OneNote
         {
             var OFedu = new Pages();
             OFedu.PagesFormHeading = "Education/Work";
+            OFedu.NOTEBOOKid = NOTEBOOKID;
             OFedu.ShowDialog();
             
         }
@@ -28,6 +30,7 @@ namespace OneNote
         {
             var OFweekend = new Pages();
             OFweekend.PagesFormHeading = "Weekend";
+            OFweekend.NOTEBOOKid = NOTEBOOKID;
             OFweekend.ShowDialog();
             
         }
@@ -35,7 +38,8 @@ namespace OneNote
         private void label6_Click(object sender, EventArgs e)
         {
             var OFimp = new Pages();
-            OFimp.PagesFormHeading = "Importances";
+            OFimp.PagesFormHeading = "Imp";
+            OFimp.NOTEBOOKid = NOTEBOOKID;
             OFimp.ShowDialog();
             
         }

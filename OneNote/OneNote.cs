@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace OneNote
@@ -8,6 +9,7 @@ namespace OneNote
     {
 
         public String notebookName;
+        public int notebookID;
         public OneNote()
         {
             InitializeComponent();
@@ -48,6 +50,7 @@ namespace OneNote
         {
             var sections = new Sections();
             sections.heading= notebookName;
+            sections.NOTEBOOKID = notebookID;
             sections.ShowDialog();
 
         }
@@ -72,8 +75,11 @@ namespace OneNote
             
             //labelNoteBook.BackColor= Color.Black;
             labelNoteBook.Text = notebookName + "'s NoteBook";
+            notebookID = notebookID;
 
         }
+
+        
 
         private void ovalPictureBox1_Click(object sender, EventArgs e)
         {

@@ -87,6 +87,7 @@
             this.label2.Size = new System.Drawing.Size(265, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "___________________________________________";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // labelpage3
             // 
@@ -178,6 +179,7 @@
             this.labelpage4.TabIndex = 38;
             this.labelpage4.Text = "PAGE 4";
             this.labelpage4.Visible = false;
+            this.labelpage4.Click += new System.EventHandler(this.labelpage4_Click);
             // 
             // labelpage8
             // 
@@ -189,6 +191,7 @@
             this.labelpage8.TabIndex = 42;
             this.labelpage8.Text = "PAGE 8";
             this.labelpage8.Visible = false;
+            this.labelpage8.Click += new System.EventHandler(this.labelpage8_Click);
             // 
             // labelpage7
             // 
@@ -200,6 +203,7 @@
             this.labelpage7.TabIndex = 41;
             this.labelpage7.Text = "PAGE7";
             this.labelpage7.Visible = false;
+            this.labelpage7.Click += new System.EventHandler(this.labelpage7_Click);
             // 
             // labelpage6
             // 
@@ -211,6 +215,7 @@
             this.labelpage6.TabIndex = 40;
             this.labelpage6.Text = "PAGE 6";
             this.labelpage6.Visible = false;
+            this.labelpage6.Click += new System.EventHandler(this.labelpage6_Click);
             // 
             // labelpage5
             // 
@@ -222,6 +227,7 @@
             this.labelpage5.TabIndex = 39;
             this.labelpage5.Text = "PAGE 5";
             this.labelpage5.Visible = false;
+            this.labelpage5.Click += new System.EventHandler(this.labelpage5_Click);
             // 
             // labelpage10
             // 
@@ -233,6 +239,7 @@
             this.labelpage10.TabIndex = 44;
             this.labelpage10.Text = "PAGE 10";
             this.labelpage10.Visible = false;
+            this.labelpage10.Click += new System.EventHandler(this.labelpage10_Click);
             // 
             // labelpage9
             // 
@@ -244,6 +251,7 @@
             this.labelpage9.TabIndex = 43;
             this.labelpage9.Text = "pAGE 9";
             this.labelpage9.Visible = false;
+            this.labelpage9.Click += new System.EventHandler(this.labelpage9_Click);
             // 
             // textBox1
             // 

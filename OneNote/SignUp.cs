@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace OneNote
 {
@@ -17,16 +18,25 @@ namespace OneNote
 
         }
         //to add data into the User(NotebookId)
+        
         private void set_NoteBookID_in_Userr(String email)
         {
+
+            
+
             SqlConnection sqlCon = new SqlConnection();
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
             sqlCon.Open();
+
+            giveUser3Sections(email,sqlCon);
+
+
             // first save the user_id into a variable(userid==notebookid always i guess)
             SqlCommand sqlCommand = new SqlCommand("Select Notebookid from [Notebook] where email = '" + email + "' ", sqlCon);
             int NotebookID = (int)sqlCommand.ExecuteScalar();
-
-
+           // Pages pages = new Pages();
+           // pages.notebookId = NotebookID;
+            
             String queryOneNote = "update [User] set NotebookId = '" + NotebookID + "' where email = '" + email + "'";
             SqlCommand sqlCommand2 = new SqlCommand(queryOneNote, sqlCon);
             sqlCommand2.Connection = sqlCon;
@@ -43,8 +53,44 @@ namespace OneNote
             }
 
         }
-    
+       
 
+        private void giveUser3Sections(String email, SqlConnection sqlcon)
+        {
+            //first save notebookID 
+            SqlCommand sqlCommand = new SqlCommand("Select NotebookId from [NoteBook] where email = '" + email + "' ", sqlcon);
+
+            int notebookID = (int)sqlCommand.ExecuteScalar();
+            
+            var pages = new Pages();
+        
+            if (notebookID != -1)
+            {
+
+                String query = "insert into Section(name,notebookId) values('Education/Work','" + notebookID + "')," +
+                    "('Weekend','" + notebookID + "'),('Imp','" + notebookID + "')";
+                SqlCommand sqlCmd = new SqlCommand(query,sqlcon);
+                sqlCmd.Connection = sqlcon;
+                sqlCmd.CommandType = CommandType.Text;
+                int b = sqlCmd.ExecuteNonQuery();
+                if (b != -1)
+                {
+                    
+                    Console.Write("sections added:");
+
+                }
+                else
+                {
+                    MessageBox.Show("sections nooooot added:");
+                }
+               
+            }
+            else
+            {
+                MessageBox.Show("Error in signup class giveuser3section---");
+            }
+
+        }
 
         private Boolean check_existing_email(String email)
         {
@@ -101,7 +147,7 @@ namespace OneNote
             {
                 if (check_existing_email(email) == true)
                 {
-                    MessageBox.Show("Sorry: Entered email already exists in database:");
+                    MessageBox.Show("Sorry: Entered email already exists:");
                 }
                 else
                 {
@@ -115,12 +161,13 @@ namespace OneNote
                     int a = sqlCommand.ExecuteNonQuery();
                     if (a != -1)
                     {
-                        ////adding count for userid so that it will also be used in setting notebookid
+                        add_data_to_NoteBookTable(firstname, email, sqlCon);
                         MessageBox.Show("Account Created Successfully:");
                         LogIn login = new LogIn();
                         this.Hide();
                         login.ShowDialog();
                         this.Close();
+                        
                     }
                     else
                     {
@@ -128,10 +175,10 @@ namespace OneNote
                     }
 
                     //Now add the firstname to the OneNote table
+
                     
 
-                    add_data_to_NoteBookTable(firstname, email,sqlCon);
-                    
+
 
                 }
 
@@ -141,12 +188,9 @@ namespace OneNote
 
         }
 
-        //method to add the add the data into the NoteBook Table
+        //method to add the data into the NoteBook Table
         private void add_data_to_NoteBookTable(String firstname, String email, SqlConnection sqlCon)
         {
-          
-         
-
             String queryOneNote = "insert into NoteBook(name,email) values('" + firstname + "' ,'"+email+"')";
             SqlCommand sqlCommand2 = new SqlCommand(queryOneNote, sqlCon);
             sqlCommand2.Connection = sqlCon;
@@ -155,7 +199,7 @@ namespace OneNote
             if (b != -1)
             {
                 set_NoteBookID_in_Userr(email);
-                Console.Write("data added to NoteBook Successfully:");
+               Console.WriteLine("data added to NoteBook Successfully:");
             }
             else
             {
@@ -169,6 +213,11 @@ namespace OneNote
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void SignUp_Load(object sender, EventArgs e)
+        {
 
         }
     }

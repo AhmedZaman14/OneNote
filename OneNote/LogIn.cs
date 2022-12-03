@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace OneNote
 {
@@ -72,6 +73,7 @@ namespace OneNote
         }
 
         private String throw_NoteBookName = "";
+        private int throw_NoteBooKID = -1;
         private String getUserName(String email,SqlConnection sqlCon)
         {
            
@@ -90,8 +92,32 @@ namespace OneNote
                 return "";
             }
         }
+
+
+        public int throwNOteBookID_to_PAges(String email,SqlConnection sqlCon)
+        {
+            String query = "Select [Notebookid] from [NoteBook] where email = '" + email + "' ";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
+            int notebookID = (int)sqlCommand.ExecuteScalar();
+            if (notebookID!=-1)
+            {
+
+                return notebookID;
+            }
+            else
+            {
+
+                return -1;
+            }
+
+
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
+
+            
             //also will have to add a specific method so if the email is of Admin he
             //wil be directed to the Admin's Form
 
@@ -122,10 +148,12 @@ namespace OneNote
                         String throw_email = email;
 
                         throw_NoteBookName = getUserName(throw_email,sqlCon);
+                        throw_NoteBooKID = throwNOteBookID_to_PAges(email,sqlCon);
                         
                         OneNote one = new OneNote();
                         this.Hide();
                         one.notebookName = throw_NoteBookName;
+                        one.notebookID= throw_NoteBooKID;
                         one.ShowDialog();
                         this.Close();
                         

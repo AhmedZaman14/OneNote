@@ -14,9 +14,7 @@ namespace OneNote
         {
 
             // first save the notes then go back.
-            Pages pages = new Pages();
-            this.Hide();
-            pages.ShowDialog();
+            
             this.Close();
         }
 
