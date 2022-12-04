@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -74,6 +76,23 @@ namespace OneNote
 
         }
 
+        private int getNoteId(int sectionId,String pageTitle, SqlConnection sqlCon)
+        {
+            SqlCommand cmd = new SqlCommand("Select note_id from [Page] where section_id='" + sectionId + "' and pageTitle = '" + pageTitle + "' ", sqlCon);
+            int noteId = (int)cmd.ExecuteScalar();
+            if (noteId!=-1)
+            {
+                return noteId;
+            }
+            else
+            {
+                MessageBox.Show("getNoteId error:");
+                return -1;
+            }
+            
+        }
+
+        public List<int> NOTEID_list = new List<int>();     
         private void displaypages(int countofpage,int sectionID,SqlConnection sqlCon){
             if (countofpage>=1)
             {
@@ -86,10 +105,11 @@ namespace OneNote
                 if (countofpage==1)
                 {
                     reader.Read();
-                    // SqlCommand cmd = new SqlCommand("Select pageTitle from [Page] where section_id='" + sectionID + "' ", sqlCon);
                     labelpage1.Text = (string)reader[0].ToString();
+                    
                     labelpage1.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon)) ;
                 }
                 if (countofpage==2)
                 {
@@ -100,6 +120,8 @@ namespace OneNote
                     labelpage2.Text = (string)reader[0].ToString();
                     labelpage2.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
                 }
                 if (countofpage==3)
                 {
@@ -113,6 +135,9 @@ namespace OneNote
                     labelpage3.Text = (string)reader[0].ToString();
                     labelpage3.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID,labelpage3.Text,sqlCon));
                 }
                 if (countofpage == 4)
                 {
@@ -129,6 +154,10 @@ namespace OneNote
                     labelpage4.Text = (string)reader[0].ToString();
                     labelpage4.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage3.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage4.Text, sqlCon));
                 }
                 if (countofpage == 5)
                 {
@@ -148,6 +177,11 @@ namespace OneNote
                     labelpage5.Text = (string)reader[0].ToString();
                     labelpage5.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage3.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage4.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage5.Text, sqlCon));
                 }
                 if (countofpage == 6)
                 {
@@ -170,6 +204,12 @@ namespace OneNote
                     labelpage6.Text = (string)reader[0].ToString();
                     labelpage6.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage3.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage4.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage5.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage6.Text, sqlCon));
                 }
                 if (countofpage == 7)
                 {
@@ -195,6 +235,13 @@ namespace OneNote
                     labelpage7.Text = (string)reader[0].ToString();
                     labelpage7.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage3.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage4.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage5.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage6.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage7.Text, sqlCon));
                 }
                 if (countofpage == 8)
                 {
@@ -223,6 +270,14 @@ namespace OneNote
                     labelpage8.Text = (string)reader[0].ToString();
                     labelpage8.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage3.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage4.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage5.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage6.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage7.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage8.Text, sqlCon));
                 }
                 if (countofpage == 9)
                 {
@@ -254,6 +309,15 @@ namespace OneNote
                     labelpage9.Text = (string)reader[0].ToString();
                     labelpage9.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage3.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage4.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage5.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage6.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage7.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage8.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage9.Text, sqlCon));
                 }
                 if (countofpage == 10)
                 {
@@ -289,6 +353,16 @@ namespace OneNote
                     labelpage10.Text = (string)reader[0].ToString();
                     labelpage10.Visible = true;
                     reader.Close();
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage1.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage2.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage3.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage4.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage5.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage6.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage7.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage8.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage9.Text, sqlCon));
+                    NOTEID_list.Add(getNoteId(sectionID, labelpage10.Text, sqlCon));
                 }
                 else
                 {
@@ -349,14 +423,16 @@ namespace OneNote
         private void label4_Click(object sender, EventArgs e)
         {
             var note1 = new Notes();
-            
+            note1.NOTEid= NOTEID_list[0];
             note1.ShowDialog();
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
             var note3 = new Notes();
-
+           
+            note3.NOTEid=NOTEID_list[2];
+            
             note3.ShowDialog();
         }
 
@@ -379,7 +455,8 @@ namespace OneNote
         private void label5_Click_1(object sender, EventArgs e)
         {
             var note2 = new Notes();
-
+            
+            note2.NOTEid=NOTEID_list[1];
             note2.ShowDialog();
         }
 
@@ -464,6 +541,11 @@ namespace OneNote
             {
                 MessageBox.Show("Plz enter the Name For your Note");
             }
+            else if (checkPageExistance(sectionID,pagename,sqlCon))
+            {
+                //add a method so that no page with same name can be created
+                MessageBox.Show("Page with this name already exists in "+PagesFormHeading);
+            }
             else
             {
                 
@@ -478,100 +560,116 @@ namespace OneNote
                 
                 if (sectionID != -1)
                 {
-
+                   
                     count = getPageCount(sectionID, sqlCon)+ 1;
                     if (count == 1)
                     {
+                      
+
                         
-                        pagename = textBox1.Text.TrimEnd();
-                        labelpage1.Text = pagename.ToUpper();
-                        labelpage1.Visible = true;
 
-                        // now add and set data in database
-                        addData_to_Pages(pagename,sectionID,sqlCon);
+                            labelpage1.Text = pagename.ToUpper();
+                            labelpage1.Visible = true;
+                            addData_to_Pages(pagename,sectionID,sqlCon);
+                            
 
+                            this.Close();
+                       
                     }
-                    if (count == 2)
+                    if (count == 2 )
                     {
                        
-                        pagename = textBox1.Text.TrimEnd();
+                       
 
                         labelpage2.Text = pagename.ToUpper();
                         labelpage2.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
 
                     }
-                    if (count == 3)
+                    if (count == 3 )
                     {
 
-                        pagename = textBox1.Text.TrimEnd();
 
                         labelpage3.Text = pagename.ToUpper();
                         labelpage3.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
+                       
+                        
+
                     }
-                    if (count == 4)
+                    if (count == 4 )
                     {
-                        pagename = textBox1.Text.TrimEnd();
+                        
 
                         labelpage4.Text = pagename.ToUpper();
                         labelpage4.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
+
 
                     }
                     if (count == 5)
                     {
-                        pagename = textBox1.Text.TrimEnd();
+                       
                         labelpage5.Text = pagename.ToUpper();
                         labelpage5.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
-
-                    }
-                    if (count == 6)
-                    {
-                        pagename = textBox1.Text.TrimEnd();
-                        labelpage6.Text = pagename.ToUpper();
-                        labelpage6.Visible = true;
-                        addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
                         
 
                     }
-                    if (count == 7)
+                    if (count == 6 )
                     {
-                        pagename = textBox1.Text.TrimEnd();
+                        labelpage6.Text = pagename.ToUpper();
+                        labelpage6.Visible = true;
+                        addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
+
+
+                    }
+                    if (count == 7 )
+                    {
+                        
                         labelpage7.Text = pagename.ToUpper();
                         labelpage7.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
 
                     }
-                    if (count == 8)
+                    if (count == 8 )
                     {
-                        pagename = textBox1.Text.TrimEnd();
                         labelpage8.Text = pagename.ToUpper();
                         labelpage8.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
 
                     }
                     if (count == 9)
                     {
-                        pagename = textBox1.Text.TrimEnd();
                         labelpage9.Text = pagename.ToUpper();
                         labelpage9.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
                     }
-                    if (count == 10)
+                    if (count == 10 )
                     {
                         
-                        pagename = textBox1.Text.TrimEnd();
                         labelpage10.Text = pagename.ToUpper();
                         labelpage10.Visible = true;
                         addData_to_Pages(pagename, sectionID, sqlCon);
+                        this.Close();
+
 
                     }
-                    if (count > 10)
+                    if (count > 10 )
                     {
-                        MessageBox.Show("Only 10 Pages Are Allowed In Each Section");
+                        
+                            MessageBox.Show("Only 10 Pages Are Allowed In Each Section");
+                      
                     }
+                   
                 }
                 else
                 {
@@ -582,6 +680,24 @@ namespace OneNote
 
             }
 
+        }
+
+        private Boolean checkPageExistance(int sectionID, string pagename, SqlConnection sqlCon)
+        {
+            SqlCommand sqlCommand = new SqlCommand("Select pageTitle from [Page] where section_id = '" + sectionID + "' and pageTitle='"+pagename+"'", sqlCon);
+            String page_check = (string)sqlCommand.ExecuteScalar();
+            if (page_check != null)
+            {
+                if (page_check.Equals(pagename))
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -605,49 +721,49 @@ namespace OneNote
         private void labelpage4_Click(object sender, EventArgs e)
         {
             var note4 = new Notes();
-
+            note4.NOTEid = NOTEID_list[3];
             note4.ShowDialog();
         }
 
         private void labelpage5_Click(object sender, EventArgs e)
         {
             var note5 = new Notes();
-
+            note5.NOTEid = NOTEID_list[4];
             note5.ShowDialog();
         }
 
         private void labelpage6_Click(object sender, EventArgs e)
         {
             var note6 = new Notes();
-
+            note6.NOTEid = NOTEID_list[5];
             note6.ShowDialog();
         }
 
         private void labelpage7_Click(object sender, EventArgs e)
         {
             var note7 = new Notes();
-
+            note7.NOTEid = NOTEID_list[6];
             note7.ShowDialog();
         }
 
         private void labelpage8_Click(object sender, EventArgs e)
         {
             var note8 = new Notes();
-
+            note8.NOTEid = NOTEID_list[7];
             note8.ShowDialog();
         }
 
         private void labelpage9_Click(object sender, EventArgs e)
         {
             var note9 = new Notes();
-
+            note9.NOTEid = NOTEID_list[8];
             note9.ShowDialog();
         }
 
         private void labelpage10_Click(object sender, EventArgs e)
         {
             var note10 = new Notes();
-
+            note10.NOTEid = NOTEID_list[9];
             note10.ShowDialog();
         }
 

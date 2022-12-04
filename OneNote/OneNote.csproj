@@ -52,6 +52,7 @@
     <Compile Include="Administrator.Designer.cs">
       <DependentUpon>Administrator.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArrayList.cs" />
     <Compile Include="NoteLayout.cs">
       <SubType>Form</SubType>
     </Compile>
