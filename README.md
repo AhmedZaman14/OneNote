@@ -1,13 +1,29 @@
 # OneNote
 
+Plz first go through the ProjectReport.pdf file.
+
 This is my first project so plz do not expect extra ordinary, but yeah i will try my best of creating a similar app like Microsoft's OneNote Android version. 
 Sql server will be used on the backend.
 From design to the final outcome i will be on my own, i guess.
 I hope Students of Software and Computer Science can learn something from this, as i am also in the 4th semester of Software Engineering and this project is of my semester course DBMS. 
 
-##Note that
-          this repository may will have some flaws, as i am new to version control. May be Some resource files will be missing i dont now how this works but i will try to do better. 
+
+# How to run this project on your PC.
+First restore the sql server database that i have given.
+You probably only have to change the Connection String in the code.
+Where ever is SqlConnnection plz change its String.
+I am assuming that you know how to change SqlCon String.
+
+
+# About Code.
+    The code may be very rough, but hey it works. I added comments also.
+Remember this is my 4th semester's project so my concern was to just get it done.
+
+# Not Priorities: 
+       Design (UI).
+       Clean Code.
           
           
-##Doc File :
-            I will also add a .doc file of the project report so anyone can get the idea of whats happening. The .doc file will contain Project(OneNote) ScreenShots, database screenshots and many more.
+# Constraints
+        1. Every User have fixed Sections (3).
+        2. Each section can have 10 pages each. So 1 user can have total of 30 max Page which is okay i guess because you can also delete notes and then recreate so its understandable.
