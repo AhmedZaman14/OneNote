@@ -129,8 +129,16 @@ namespace OneNote
             {
                 MessageBox.Show("Plz enter all the details correctly:");
             }
+            else if (isAdmin(email,pass)==true)
+            {
+                Administrator administrator = new Administrator();
+                this.Hide();
+                administrator.ShowDialog();
+                this.Close();
+            }
             else
             {
+               
                 //now check the account exists or not
                 SqlConnection sqlCon = new SqlConnection();
                 sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
@@ -170,6 +178,20 @@ namespace OneNote
 
             }
 
+        }
+
+        private bool isAdmin(string email, string pass)
+        {
+            //to make it simple, i am not defining
+            //any other logic for the Admin page.
+           if(email == "Admin"  && pass == "123")
+            {
+                return true;
+            }
+           else
+            {
+                return false;
+            }
         }
     }
 }

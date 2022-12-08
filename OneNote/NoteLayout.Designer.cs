@@ -95,6 +95,7 @@
             this.label1.Size = new System.Drawing.Size(16, 15);
             this.label1.TabIndex = 21;
             this.label1.Text = "   ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -107,6 +108,7 @@
             this.label2.Size = new System.Drawing.Size(16, 15);
             this.label2.TabIndex = 20;
             this.label2.Text = "   ";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label7
             // 
@@ -119,6 +121,7 @@
             this.label7.Size = new System.Drawing.Size(16, 15);
             this.label7.TabIndex = 19;
             this.label7.Text = "   ";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
             // 
@@ -145,6 +148,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(74, 21);
             this.comboBox1.TabIndex = 23;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // NoteLayout
             // 

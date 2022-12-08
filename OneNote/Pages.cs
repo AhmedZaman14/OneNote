@@ -393,12 +393,35 @@ namespace OneNote
                 SqlCommand cmd2 = new SqlCommand("select max(note_id) from Note  ",sqlCon);
                 NOTE_ID= (int)cmd2.ExecuteScalar();
                 addNoteID_to_Page(NOTE_ID,pageid, sqlCon);
+                insertIntoNoteLayout(NOTE_ID,sqlCon);
+                
                 //MessageBox.Show("data added to Notes Table Successfully:");
             }
             else
             {
                 MessageBox.Show("Error in Pages class data could not be added: method-->adddatatoNOte ");
             }
+        }
+
+        private void insertIntoNoteLayout(int noteId, SqlConnection sqlCon)
+        {
+
+
+            SqlCommand sqlCommand = new SqlCommand("insert into Notelayout(note_id,fontName,textcolor) values('" + noteId + "','"+""+ "','"+""+"') ", sqlCon);
+            sqlCommand.Connection = sqlCon;
+            sqlCommand.CommandType = CommandType.Text;
+            int b = (int)sqlCommand.ExecuteNonQuery();
+            if (b != -1)
+            {
+
+               // MessageBox.Show("notelayout  added");
+            }
+            else
+            {
+                MessageBox.Show("NoteLayout not added");
+            }
+
+
         }
 
 
@@ -768,6 +791,11 @@ namespace OneNote
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label111_Click(object sender, EventArgs e)
         {
 
         }

@@ -142,6 +142,10 @@ namespace OneNote
             if (firstname == "" || lastname == "" || email == "" || password == "")
             {
                 MessageBox.Show("Plz enter all the details correctly:");
+                this.Hide();
+                this.Close();
+                SignUp signUp = new SignUp();
+                signUp.ShowDialog();
             }
             else
             {

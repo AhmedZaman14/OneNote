@@ -274,6 +274,7 @@
             this.label111.TabIndex = 46;
             this.label111.Text = "Enter Page Name";
             this.label111.Visible = false;
+            this.label111.Click += new System.EventHandler(this.label111_Click);
             // 
             // buttonAddPage
             // 

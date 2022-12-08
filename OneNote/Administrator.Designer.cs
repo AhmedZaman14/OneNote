@@ -34,9 +34,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.totalNotesLabel = new System.Windows.Forms.Label();
+            this.totalUserLabel = new System.Windows.Forms.Label();
+            this.categoryLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
@@ -125,43 +125,43 @@
             this.label5.TabIndex = 17;
             this.label5.Text = "Rating";
             // 
-            // label6
+            // totalNotesLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(211, 123);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 29);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "00";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.totalNotesLabel.AutoSize = true;
+            this.totalNotesLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.totalNotesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalNotesLabel.ForeColor = System.Drawing.Color.White;
+            this.totalNotesLabel.Location = new System.Drawing.Point(223, 123);
+            this.totalNotesLabel.Name = "totalNotesLabel";
+            this.totalNotesLabel.Size = new System.Drawing.Size(41, 29);
+            this.totalNotesLabel.TabIndex = 18;
+            this.totalNotesLabel.Text = "00";
+            this.totalNotesLabel.Click += new System.EventHandler(this.label6_Click);
             // 
-            // label7
+            // totalUserLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(192)))), ((int)(((byte)(18)))));
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(347, 123);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 29);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "00";
+            this.totalUserLabel.AutoSize = true;
+            this.totalUserLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(192)))), ((int)(((byte)(18)))));
+            this.totalUserLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalUserLabel.ForeColor = System.Drawing.Color.White;
+            this.totalUserLabel.Location = new System.Drawing.Point(355, 123);
+            this.totalUserLabel.Name = "totalUserLabel";
+            this.totalUserLabel.Size = new System.Drawing.Size(41, 29);
+            this.totalUserLabel.TabIndex = 19;
+            this.totalUserLabel.Text = "00";
             // 
-            // label8
+            // categoryLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(178)))), ((int)(((byte)(41)))));
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(477, 123);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 29);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "00";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+            this.categoryLabel.AutoSize = true;
+            this.categoryLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(178)))), ((int)(((byte)(41)))));
+            this.categoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryLabel.ForeColor = System.Drawing.Color.White;
+            this.categoryLabel.Location = new System.Drawing.Point(489, 123);
+            this.categoryLabel.Name = "categoryLabel";
+            this.categoryLabel.Size = new System.Drawing.Size(41, 29);
+            this.categoryLabel.TabIndex = 20;
+            this.categoryLabel.Text = "00";
+            this.categoryLabel.Click += new System.EventHandler(this.label8_Click);
             // 
             // label9
             // 
@@ -169,7 +169,7 @@
             this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(83)))), ((int)(((byte)(155)))));
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(612, 123);
+            this.label9.Location = new System.Drawing.Point(613, 123);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 29);
             this.label9.TabIndex = 21;
@@ -307,9 +307,9 @@
             this.ClientSize = new System.Drawing.Size(699, 362);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.categoryLabel);
+            this.Controls.Add(this.totalUserLabel);
+            this.Controls.Add(this.totalNotesLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -330,6 +330,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Administrator";
             this.Text = "Administrator";
+            this.Load += new System.EventHandler(this.Administrator_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
@@ -366,9 +367,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label totalNotesLabel;
+        private System.Windows.Forms.Label totalUserLabel;
+        private System.Windows.Forms.Label categoryLabel;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
     }

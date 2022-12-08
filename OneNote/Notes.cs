@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
+using static System.Collections.Specialized.BitVector32;
 
 namespace OneNote
 {
@@ -28,13 +30,14 @@ namespace OneNote
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
             sqlCon.Open();
 
-            SqlCommand sqlCommand = new SqlCommand("update Note set text = '"+richTextBox1.Text+"'  where note_id = '" + NOTEid + "'", sqlCon);
+            SqlCommand sqlCommand = new SqlCommand("update Note set text = '" + richTextBox1.Text + "'  where note_id = '" + NOTEid + "'", sqlCon);
             sqlCommand.Connection = sqlCon;
             sqlCommand.CommandType = CommandType.Text;
             int b = (int)sqlCommand.ExecuteNonQuery();
             if (b != -1)
             {
-              //  MessageBox.Show("Saved");
+                addCategoryToNote(NOTEid,sqlCon);
+                //  MessageBox.Show("Saved");
             }
             else
             {
@@ -44,13 +47,67 @@ namespace OneNote
 
         }
 
+        private void setFont(int Noteid, SqlConnection sqlCon)
+        {
+
+            String fontName, textcolor;
+            SqlCommand sqlCommand = new SqlCommand("Select fontname from [NoteLayout] where note_id = '" + Noteid + "' ", sqlCon);
+            fontName = (string)sqlCommand.ExecuteScalar();
+            if (fontName != null)
+            {
+                if (fontName.Equals("Calibri"))
+                {
+
+                    richTextBox1.Font = new Font("Calibri", 9);
+                }
+                else if (fontName.Equals("Arial"))
+                {
+                    richTextBox1.Font = new Font("Arial", 9);
+                }
+            }
+            else
+            {
+                richTextBox1.Font = new Font("Georgia", 9);
+            }
+        }
+
+        private void setColor(int Noteid, SqlConnection sqlCon)
+        {
+
+            String textcolor;
+            SqlCommand sqlCommand = new SqlCommand("Select textColor from [NoteLayout] where note_id = '" + Noteid + "' ", sqlCon);
+            textcolor = (string)sqlCommand.ExecuteScalar();
+            if (textcolor != null)
+            {
+                if (textcolor.Equals("Blue"))
+                {
+
+                    richTextBox1.ForeColor = Color.Blue;
+                }
+                else if (textcolor.Equals("Purple"))
+                {
+                    richTextBox1.ForeColor = Color.Purple;
+                }
+            }
+            else
+            {
+                richTextBox1.ForeColor = Color.Black;
+            }
+        }
+
+
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            saveNote();
+
             NoteLayout layout = new NoteLayout();
-            this.Hide();
+            this.Close();
+            layout.NOTEID = NOTEid;
             layout.ShowDialog();
-            this.Show();
+
+
+
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -79,11 +136,11 @@ namespace OneNote
             SqlConnection sqlCon = new SqlConnection();
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
             sqlCon.Open();
-            
-            SqlCommand sqlCommand = new SqlCommand("select text from Note where note_id = '"+NOTEid+"'",sqlCon);
+
+            SqlCommand sqlCommand = new SqlCommand("select text from Note where note_id = '" + NOTEid + "'", sqlCon);
             sqlCommand.Connection = sqlCon;
             sqlCommand.CommandType = CommandType.Text;
-            richTextBox1.Text= sqlCommand.ExecuteScalar().ToString();
+            richTextBox1.Text = sqlCommand.ExecuteScalar().ToString();
 
 
             //to get NoteName \(noteName = paganame)
@@ -97,6 +154,9 @@ namespace OneNote
             sqlCommand2.Connection = sqlCon;
             sqlCommand2.CommandType = CommandType.Text;
             label4.Text = sqlCommand2.ExecuteScalar().ToString();
+
+            setFont(NOTEid, sqlCon);
+            setColor(NOTEid, sqlCon);
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -131,18 +191,31 @@ namespace OneNote
             int b = (int)sqlCommand.ExecuteNonQuery();
             if (b != -1)
             {
-                SqlCommand sqlCommand1 = new SqlCommand("delete from Note  where note_id = '" + NOTEid + "'", sqlCon);
-                sqlCommand1.Connection = sqlCon;
-                sqlCommand1.CommandType = CommandType.Text;
-                int a = (int)sqlCommand1.ExecuteNonQuery();
-                if (a!=-1)
+                SqlCommand sqlCommand11 = new SqlCommand("delete from NoteLayout  where note_id = '" + NOTEid + "'", sqlCon);
+                sqlCommand11.Connection = sqlCon;
+                sqlCommand11.CommandType = CommandType.Text;
+                int c = (int)sqlCommand11.ExecuteNonQuery();
+
+                if (c != -1)
                 {
-                    //  MessageBox.Show("Deleted");
+                    SqlCommand sqlCommand1 = new SqlCommand("delete from Note  where note_id = '" + NOTEid + "'", sqlCon);
+                    sqlCommand1.Connection = sqlCon;
+                    sqlCommand1.CommandType = CommandType.Text;
+                    int a = (int)sqlCommand1.ExecuteNonQuery();
+                    if (a != -1)
+                    {
+                        //  MessageBox.Show("Deleted");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not Deleted from Note");
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Not Deleted from Note");
                 }
+
 
             }
             else
@@ -163,6 +236,85 @@ namespace OneNote
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+            
+        }
+
+
+        private void addCategoryToNote(int note_id, SqlConnection sqlCon)
+        {
+            String category = getCategoryfromText(note_id, sqlCon);
+            String query;
+            if (category.Equals("School"))
+            {
+                query = "update Note set category_id = 1 where note_id ='"+note_id+"'";
+            }
+            else if (category.Equals("work"))
+            {
+                query = "update Note set category_id = 2 where note_id ='" + note_id + "'";
+            }
+            else if (category.Equals("Domiciliary"))
+            {
+                query = "update Note set category_id = 3 where note_id ='" + note_id + "'";
+            }
+            else
+            {
+                query = "update Note set category_id = 4 where note_id ='" + note_id + "'";
+            }
+
+            SqlCommand cmd = new SqlCommand(query,sqlCon);
+            cmd.Connection = sqlCon;
+            cmd.CommandType = CommandType.Text;
+            int b = (int)cmd.ExecuteNonQuery();
+            if (b != -1)
+            {
+
+              //  MessageBox.Show("Category  added");
+            }
+            else
+            {
+                MessageBox.Show("Category not added");
+            }
+        }
+
+        //keywords to categorize (just ignore these)
+        String[] School = { "assignment", "quiz", "homework", "class", "education", "teacher", "course" };
+        String[] work = { "project", "team", "boss", "email" };
+        String[] Domiciliary = { "groceries", "food", "bills", "car","family" ,"whatever" };
+        private string getCategoryfromText(int note_id, SqlConnection sqlCon)
+        {
+            for (int i=0;i<School.Length;i++) {
+                if (richTextBox1.Text.Contains(School[i])) 
+                {
+                    
+                    return "School";
+
+                }
+                
+
+            }
+            for (int i = 0; i < work.Length; i++)
+            {
+                if (richTextBox1.Text.Contains(work[i])) 
+                {
+                    return "Work";
+
+                }
+
+            }
+
+            for (int i = 0; i < Domiciliary.Length; i++)
+            {
+                if (richTextBox1.Text.Contains(Domiciliary[i])) 
+                {
+                    return "Domiciliary";
+
+                }
+
+            }
+
+            return "other";
+
+           
 
         }
     }
