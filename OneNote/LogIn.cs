@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace OneNote
 {
@@ -15,7 +14,7 @@ namespace OneNote
 
         private void LogIn_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -26,12 +25,12 @@ namespace OneNote
             this.Close();
         }
 
-        private Boolean check_Account_existance(String email,SqlConnection sqlConnection)
+        private Boolean check_Account_existance(String email, SqlConnection sqlConnection)
         {
             //chech if the email entered already exists in database or not?
-            
 
-            SqlCommand sqlCommand = new SqlCommand("Select email from [User] where email = '" + email + "' ",sqlConnection);
+
+            SqlCommand sqlCommand = new SqlCommand("Select email from [User] where email = '" + email + "' ", sqlConnection);
             String em_check = (string)sqlCommand.ExecuteScalar();
             if (em_check != null)
             {
@@ -47,10 +46,10 @@ namespace OneNote
             }
         }
 
-        private Boolean check_password(String email, String pass,SqlConnection sqlCon)
+        private Boolean check_password(String email, String pass, SqlConnection sqlCon)
         {
             //check if the entered password for that email is correct
-            
+
             SqlCommand sqlCommand = new SqlCommand("Select password from [User] where email = '" + email + "' ", sqlCon);
             String pass_chech = (string)sqlCommand.ExecuteScalar();
             if (pass_chech != null)
@@ -74,9 +73,9 @@ namespace OneNote
 
         private String throw_NoteBookName = "";
         private int throw_NoteBooKID = -1;
-        private String getUserName(String email,SqlConnection sqlCon)
+        private String getUserName(String email, SqlConnection sqlCon)
         {
-           
+
 
             String query = "Select [name] from [User] where email = '" + email + "' ";
             SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
@@ -94,12 +93,12 @@ namespace OneNote
         }
 
 
-        public int throwNOteBookID_to_PAges(String email,SqlConnection sqlCon)
+        public int throwNOteBookID_to_PAges(String email, SqlConnection sqlCon)
         {
             String query = "Select [Notebookid] from [NoteBook] where email = '" + email + "' ";
             SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
             int notebookID = (int)sqlCommand.ExecuteScalar();
-            if (notebookID!=-1)
+            if (notebookID != -1)
             {
 
                 return notebookID;
@@ -117,9 +116,6 @@ namespace OneNote
         private void button1_Click(object sender, EventArgs e)
         {
 
-            
-            //also will have to add a specific method so if the email is of Admin he
-            //wil be directed to the Admin's Form
 
             String email = textBox1.Text.TrimEnd();
             String pass = textBox2.Text.TrimEnd();
@@ -129,7 +125,7 @@ namespace OneNote
             {
                 MessageBox.Show("Plz enter all the details correctly:");
             }
-            else if (isAdmin(email,pass)==true)
+            else if (isAdmin(email, pass) == true)
             {
                 Administrator administrator = new Administrator();
                 this.Hide();
@@ -138,16 +134,16 @@ namespace OneNote
             }
             else
             {
-               
+
                 //now check the account exists or not
                 SqlConnection sqlCon = new SqlConnection();
                 sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
                 sqlCon.Open();
 
-                if (check_Account_existance(email,sqlCon) == true)
+                if (check_Account_existance(email, sqlCon) == true)
                 {
                     //now check if the passwor entered for this email is correct.
-                    if (check_password(email, pass,sqlCon) == true)
+                    if (check_password(email, pass, sqlCon) == true)
                     {
                         //done
                         //now user will be directed to the main page of application 
@@ -155,16 +151,16 @@ namespace OneNote
 
                         String throw_email = email;
 
-                        throw_NoteBookName = getUserName(throw_email,sqlCon);
-                        throw_NoteBooKID = throwNOteBookID_to_PAges(email,sqlCon);
-                        
+                        throw_NoteBookName = getUserName(throw_email, sqlCon);
+                        throw_NoteBooKID = throwNOteBookID_to_PAges(email, sqlCon);
+
                         OneNote one = new OneNote();
                         this.Hide();
                         one.notebookName = throw_NoteBookName;
-                        one.notebookID= throw_NoteBooKID;
+                        one.notebookID = throw_NoteBooKID;
                         one.ShowDialog();
                         this.Close();
-                        
+
                     }
 
                 }
@@ -184,14 +180,19 @@ namespace OneNote
         {
             //to make it simple, i am not defining
             //any other logic for the Admin page.
-           if(email == "Admin"  && pass == "123")
+            if (email == "Admin" && pass == "123")
             {
                 return true;
             }
-           else
+            else
             {
                 return false;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

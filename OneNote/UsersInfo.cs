@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using static System.Collections.Specialized.BitVector32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace OneNote
 {
     public partial class UsersInfo : Form
     {
 
-      
+
         public UsersInfo()
         {
             InitializeComponent();
@@ -36,10 +33,10 @@ namespace OneNote
         {
 
         }
-       private int buttonClickCOunt=0;
+        private int buttonClickCOunt = 0;
         private void UsersInfo_Load(object sender, EventArgs e)
         {
-            buttonClickCOunt=0;
+            buttonClickCOunt = 0;
             SqlConnection sqlCon = new SqlConnection();
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
             sqlCon.Open();
@@ -66,7 +63,7 @@ namespace OneNote
                     String space = new String(' ', 25);
 
                     firstcolumn.Text = (string)reader[0].ToString() + "'" + space + "'" + (string)reader[1].ToString() + "'" + space + "'"
-                        + (string)reader[2].ToString() + "'" + space + "'" + (string)reader[3].ToString();
+                        + (string)reader[2].ToString() + "'" + space + 10 + "'" + (string)reader[3].ToString();
                 }
                 else
                 {
@@ -84,7 +81,7 @@ namespace OneNote
                         + (string)reader2[2].ToString();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return;
             }
@@ -111,9 +108,9 @@ namespace OneNote
             }
             catch (Exception e)
             {
-               
-                
-                 return -1;
+
+
+                return -1;
             }
         }
 
@@ -148,15 +145,15 @@ namespace OneNote
             SqlConnection sqlCon = new SqlConnection();
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
             sqlCon.Open();
-            
+
             buttonClickCOunt++;
             int USERID = getFirstUserid();
-            USERID =USERID + buttonClickCOunt;
+            USERID = USERID + buttonClickCOunt;
             if (USERID <= getLastUserid())
                 getColumns(USERID, sqlCon);
             else
                 MessageBox.Show("End of List");
-            
+
         }
 
         private void show4_Click(object sender, EventArgs e)
@@ -188,103 +185,104 @@ namespace OneNote
 
                 }
 
-                if (!user_id.Equals("-1")) { 
-                SqlConnection sqlCon = new SqlConnection();
-                sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True ;MultipleActiveResultSets=true";
-                sqlCon.Open();
+                if (!user_id.Equals("-1"))
+                {
+                    SqlConnection sqlCon = new SqlConnection();
+                    sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True ;MultipleActiveResultSets=true";
+                    sqlCon.Open();
 
 
-                  
-                        SqlCommand sqlCommand = new SqlCommand("IF exists (Select user_id from [User] where user_id= '" + user_id + "') select 1 else select -1 ", sqlCon);
-                        int a =(int) sqlCommand.ExecuteScalar();
 
-                        if (a != -1)
-                        {
-                            int USER_ID = int.Parse(user_id);
+                    SqlCommand sqlCommand = new SqlCommand("IF exists (Select user_id from [User] where user_id= '" + user_id + "') select 1 else select -1 ", sqlCon);
+                    int a = (int)sqlCommand.ExecuteScalar();
 
-                            //delete user
-                            //  deleteUser(USER_ID, sqlCon);
-                            deleteAllDataofThisUser(USER_ID, sqlCon);
+                    if (a != -1)
+                    {
+                        int USER_ID = int.Parse(user_id);
+
+                        //delete user
+                        //  deleteUser(USER_ID, sqlCon);
+                        deleteAllDataofThisUser(USER_ID, sqlCon);
 
 
-                        }
-                        else
-                        {
-
-                            MessageBox.Show("Userid '" + user_id + "' not exists");
-
-                        }
-                    
-                  
-                    
                     }
-                   
-             }
+                    else
+                    {
+
+                        MessageBox.Show("Userid '" + user_id + "' not exists");
+
+                    }
+
+
+
+                }
+
             }
-        
+        }
 
 
 
-        private int getNotebookId(int user_id , SqlConnection sqlCon)
+
+        private int getNotebookId(int user_id, SqlConnection sqlCon)
         {
             SqlCommand sqlCommand = new SqlCommand("Select notebookid from Notebook where email=" +
-                "(select email from [User] where user_id = '"+user_id+"') ", sqlCon);
+                "(select email from [User] where user_id = '" + user_id + "') ", sqlCon);
             int notebookId = (int)sqlCommand.ExecuteScalar();
             return notebookId;
         }
 
-        private void deleteNotebookId(int NoteBookid,SqlConnection sqlCon)
+        private void deleteNotebookId(int NoteBookid, SqlConnection sqlCon)
         {
-            SqlCommand sqlCommand = new SqlCommand("Delete from Notebook where notebookid ='"+NoteBookid+"'", sqlCon);
-            sqlCommand.ExecuteNonQuery();   
+            SqlCommand sqlCommand = new SqlCommand("Delete from Notebook where notebookid ='" + NoteBookid + "'", sqlCon);
+            sqlCommand.ExecuteNonQuery();
         }
 
-        private int getSectionId(int user_id,int noteBookid,SqlConnection sqlCon)
+        private int getSectionId(int user_id, int noteBookid, SqlConnection sqlCon)
         {
-            
-            String query = "select section_id from Section where notebookID ='"+noteBookid+ "' and name='Education/Work'";
+
+            String query = "select section_id from Section where notebookID ='" + noteBookid + "' and name='Education/Work'";
             SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
             return (int)sqlCommand.ExecuteScalar();
         }
 
         private int PageCountOfthisUser(int user_id, int sectionId, SqlConnection sqlCon)
         {
-                String query = "if exists (select page_id from [Page] where Section_id ='" + sectionId + "' or Section_id = '" + (sectionId + 1) + "'  or Section_id = '" + (sectionId + 2) + "') " +
-                "Select count(page_id) from [Page] where Section_id ='" + sectionId + "' or Section_id = '" + (sectionId + 1) + "'  or Section_id = '" + (sectionId + 2) + "' ELSE Select 0";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
-                return (int)sqlCommand.ExecuteScalar();
-            
-                
-           
+            String query = "if exists (select page_id from [Page] where Section_id ='" + sectionId + "' or Section_id = '" + (sectionId + 1) + "'  or Section_id = '" + (sectionId + 2) + "') " +
+            "Select count(page_id) from [Page] where Section_id ='" + sectionId + "' or Section_id = '" + (sectionId + 1) + "'  or Section_id = '" + (sectionId + 2) + "' ELSE Select 0";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
+            return (int)sqlCommand.ExecuteScalar();
+
+
+
         }
 
 
         private int[] getPageId(int user_id, int sectionId, int pageCount, SqlConnection sqlCon)
         {
-           
+
             int[] page_id_arr = new int[pageCount];
             if (pageCount > 0)
             {
-                
+
                 String query = "select page_id from [Page] where Section_id ='" + sectionId + "' or Section_id = '" + (sectionId + 1) + "'  or Section_id = '" + (sectionId + 2) + "' ";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlCon);
                 SqlDataReader reader = sqlCommand.ExecuteReader();
-                
 
-                
-                    for (int i = 0; i < pageCount; i++)
-                    {
+
+
+                for (int i = 0; i < pageCount; i++)
+                {
                     reader.Read();
                     page_id_arr[i] = (int)reader[0];
-                    
-                    }
 
-                    return page_id_arr;
-                
+                }
+
+                return page_id_arr;
+
             }
             else
             {
-               
+
                 return page_id_arr;
             }
         }
@@ -293,11 +291,12 @@ namespace OneNote
         {
             int[] noteids = new int[pageids.Length];
 
-           for (int i = 0;i<pageids.Length;i++) { 
-            SqlCommand sqlCommand = new SqlCommand("select note_id from Page where page_id= '" + pageids[i] +"'", sqlCon);
-                noteids[i]=(int)sqlCommand.ExecuteScalar();
-               
-           
+            for (int i = 0; i < pageids.Length; i++)
+            {
+                SqlCommand sqlCommand = new SqlCommand("select note_id from Page where page_id= '" + pageids[i] + "'", sqlCon);
+                noteids[i] = (int)sqlCommand.ExecuteScalar();
+
+
             }
 
 
@@ -309,7 +308,7 @@ namespace OneNote
             int[] notelayoutIds = new int[noteids.Length];
             for (int i = 0; i < noteids.Length; i++)
             {
-                SqlCommand sqlCommand = new SqlCommand("select layout_id from NoteLayout where note_id='" + noteids[i] +"'", sqlCon);
+                SqlCommand sqlCommand = new SqlCommand("select layout_id from NoteLayout where note_id='" + noteids[i] + "'", sqlCon);
                 notelayoutIds[i] = (int)sqlCommand.ExecuteScalar();
 
             }
@@ -317,32 +316,28 @@ namespace OneNote
 
         }
 
-        private void deleteAllDataofThisUser(int userid,SqlConnection sqlCon)
+        private void deleteAllDataofThisUser(int userid, SqlConnection sqlCon)
         {
-            int Notebookid =    getNotebookId(userid,sqlCon);
-            int Sectionid = getSectionId(userid,Notebookid,sqlCon);
-            int pageCount =PageCountOfthisUser(userid, Sectionid, sqlCon);
-            int[] pageid = getPageId(userid, Sectionid,pageCount ,sqlCon);
-            int[] Noteid = getNoteid(pageid,sqlCon);
-            int[] NoteLayoutid = getNoteLayoutids(Noteid,sqlCon);
-            
-            
-            deleteNoteLayout(NoteLayoutid,sqlCon);
-            deletePage(Sectionid, userid, sqlCon);
-            deleteNotes(Noteid,sqlCon);
-            deleteSection(Sectionid,sqlCon);
-            deleteUser(userid,sqlCon);
-            deleteNotebookId(Notebookid, sqlCon);
-            
+            int Notebookid = getNotebookId(userid, sqlCon);
+            int Sectionid = getSectionId(userid, Notebookid, sqlCon);
+            int pageCount = PageCountOfthisUser(userid, Sectionid, sqlCon);
+            int[] pageid = getPageId(userid, Sectionid, pageCount, sqlCon);
+            int[] Noteid = getNoteid(pageid, sqlCon);
+            int[] NoteLayoutid = getNoteLayoutids(Noteid, sqlCon);
 
-            
-            
+
+            deleteNoteLayout(NoteLayoutid, sqlCon);
+            deletePage(Sectionid, userid, sqlCon);
+            deleteNotes(Noteid, sqlCon);
+            deleteSection(Sectionid, sqlCon);
+            deleteUser(userid, sqlCon);
+            deleteNotebookId(Notebookid, sqlCon);
 
         }
 
-        private void deleteNotes(int[] noteids,SqlConnection sqlCon)
+        private void deleteNotes(int[] noteids, SqlConnection sqlCon)
         {
-          
+
             for (int i = 0; i < noteids.Length; i++)
             {
                 SqlCommand sqlCommand = new SqlCommand("delete from Note where note_id='" + noteids[i] + "'", sqlCon);
@@ -350,8 +345,8 @@ namespace OneNote
             }
         }
 
-        
-        private void deleteNoteLayout(int[] notelayoutids ,SqlConnection sqlCon)
+
+        private void deleteNoteLayout(int[] notelayoutids, SqlConnection sqlCon)
         {
             for (int i = 0; i < notelayoutids.Length; i++)
             {
@@ -361,13 +356,13 @@ namespace OneNote
             }
         }
 
-        private void deleteSection(int sectionid ,SqlConnection sqlCon)
+        private void deleteSection(int sectionid, SqlConnection sqlCon)
         {
-          
-                SqlCommand sqlCommand = new SqlCommand("delete from Section where section_id='" +sectionid+ "' or section_id='" +(sectionid+1)+ "' or section_id='" +(sectionid+2)+ "'  ", sqlCon);
-                sqlCommand.ExecuteNonQuery();
 
-            
+            SqlCommand sqlCommand = new SqlCommand("delete from Section where section_id='" + sectionid + "' or section_id='" + (sectionid + 1) + "' or section_id='" + (sectionid + 2) + "'  ", sqlCon);
+            sqlCommand.ExecuteNonQuery();
+
+
         }
 
 
@@ -376,7 +371,7 @@ namespace OneNote
         {
             SqlCommand sqlCommand = new SqlCommand("Delete  from [User] where user_id= '" + user_id + "' ", sqlCon);
             int a = (int)sqlCommand.ExecuteNonQuery();
-            if (a!=-1)
+            if (a != -1)
             {
 
                 MessageBox.Show("User Deleted");
@@ -387,14 +382,19 @@ namespace OneNote
             }
         }
 
-        private void deletePage(int Sectionid,int user_id, SqlConnection sqlCon)
+        private void deletePage(int Sectionid, int user_id, SqlConnection sqlCon)
         {
-           
-                SqlCommand sqlCommand = new SqlCommand("delete from Page where section_id = '" + Sectionid + "' Or  section_id = '" + (Sectionid + 1) + "' Or  section_id = '" + (Sectionid + 2) + "'  ", sqlCon);
-                sqlCommand.ExecuteNonQuery();
-            
-               
+
+            SqlCommand sqlCommand = new SqlCommand("delete from Page where section_id = '" + Sectionid + "' Or  section_id = '" + (Sectionid + 1) + "' Or  section_id = '" + (Sectionid + 2) + "'  ", sqlCon);
+            sqlCommand.ExecuteNonQuery();
+
+
+        }
+
+        private void firstcolumn_Click(object sender, EventArgs e)
+        {
+
         }
     }
-    
+
 }

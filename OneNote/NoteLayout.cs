@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace OneNote
@@ -26,7 +25,7 @@ namespace OneNote
             sqlCon.Open();
 
 
-            SqlCommand sqlCommand = new SqlCommand("update NoteLayout set textcolor= '"+color+"' where note_id = '" + NOTEID + "'", sqlCon);
+            SqlCommand sqlCommand = new SqlCommand("update NoteLayout set textcolor= '" + color + "' where note_id = '" + NOTEID + "'", sqlCon);
             sqlCommand.Connection = sqlCon;
             sqlCommand.CommandType = CommandType.Text;
             int b = (int)sqlCommand.ExecuteNonQuery();
@@ -95,10 +94,11 @@ namespace OneNote
             {
                 selectFont("Arial");
             }
-            else{
+            else
+            {
                 selectFont("Calibri");
             }
-            
+
         }
     }
 }

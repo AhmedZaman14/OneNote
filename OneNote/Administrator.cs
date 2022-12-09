@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace OneNote
 {
@@ -35,9 +34,12 @@ namespace OneNote
         private void pictureBox8_Click(object sender, EventArgs e)
         {
             UsersInfo users = new UsersInfo();
-            
+            this.Hide();
+            this.Close();
             users.ShowDialog();
-            
+            Administrator administrator = new Administrator();
+            administrator.ShowDialog();
+
         }
 
         private void Administrator_Load(object sender, EventArgs e)
@@ -46,9 +48,9 @@ namespace OneNote
             sqlCon.ConnectionString = "Data Source=DESKTOP-3MGQIPF\\UNIQUENAME;Initial Catalog=OneNote;Integrated Security=True";
             sqlCon.Open();
 
-          totalUserLabel.Text=  totalUsers(sqlCon).ToString();
-          totalNotesLabel.Text = totalNotes(sqlCon).ToString();
-           categoryLabel.Text= totalCategories(sqlCon).ToString();
+            totalUserLabel.Text = totalUsers(sqlCon).ToString();
+            totalNotesLabel.Text = totalNotes(sqlCon).ToString();
+            categoryLabel.Text = totalCategories(sqlCon).ToString();
         }
 
         private int totalCategories(SqlConnection sqlCon)
@@ -66,7 +68,7 @@ namespace OneNote
             }
             else
             {
-                
+
                 return 0;
             }
         }
@@ -81,7 +83,7 @@ namespace OneNote
             }
             else
             {
-                
+
                 return 0;
             }
         }

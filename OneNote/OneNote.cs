@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace OneNote
@@ -49,37 +48,23 @@ namespace OneNote
         private void label1_Click(object sender, EventArgs e)
         {
             var sections = new Sections();
-            sections.heading= notebookName;
+            sections.heading = notebookName;
             sections.NOTEBOOKID = notebookID;
             sections.ShowDialog();
 
         }
 
 
-
-
-
         private void OneNote_Load(object sender, EventArgs e)
         {
             //here u will do this 
             // lorem's NoteBook Text should change into usrs's name Notebook on the OneNote Form:
-            //Now first retreive the email of the User from database
-            // and then add that NoteBook Name and user_id to the NoteBook table.
-
-            //All done on the login.cs 
-            //here write how u did it 
-
-
-
-
-            
-            //labelNoteBook.BackColor= Color.Black;
+           
             labelNoteBook.Text = notebookName + "'s NoteBook";
-            notebookID = notebookID;
 
         }
 
-        
+
 
         private void ovalPictureBox1_Click(object sender, EventArgs e)
         {
@@ -87,6 +72,11 @@ namespace OneNote
             this.Hide();
             login.ShowDialog();
             this.Close();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }

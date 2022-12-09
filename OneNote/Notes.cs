@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Collections.Specialized.BitVector32;
 
 namespace OneNote
 {
@@ -36,7 +34,7 @@ namespace OneNote
             int b = (int)sqlCommand.ExecuteNonQuery();
             if (b != -1)
             {
-                addCategoryToNote(NOTEid,sqlCon);
+                addCategoryToNote(NOTEid, sqlCon);
                 //  MessageBox.Show("Saved");
             }
             else
@@ -236,7 +234,7 @@ namespace OneNote
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -246,7 +244,7 @@ namespace OneNote
             String query;
             if (category.Equals("School"))
             {
-                query = "update Note set category_id = 1 where note_id ='"+note_id+"'";
+                query = "update Note set category_id = 1 where note_id ='" + note_id + "'";
             }
             else if (category.Equals("work"))
             {
@@ -261,14 +259,14 @@ namespace OneNote
                 query = "update Note set category_id = 4 where note_id ='" + note_id + "'";
             }
 
-            SqlCommand cmd = new SqlCommand(query,sqlCon);
+            SqlCommand cmd = new SqlCommand(query, sqlCon);
             cmd.Connection = sqlCon;
             cmd.CommandType = CommandType.Text;
             int b = (int)cmd.ExecuteNonQuery();
             if (b != -1)
             {
 
-              //  MessageBox.Show("Category  added");
+                //  MessageBox.Show("Category  added");
             }
             else
             {
@@ -279,22 +277,23 @@ namespace OneNote
         //keywords to categorize (just ignore these)
         String[] School = { "assignment", "quiz", "homework", "class", "education", "teacher", "course" };
         String[] work = { "project", "team", "boss", "email" };
-        String[] Domiciliary = { "groceries", "food", "bills", "car","family" ,"whatever" };
+        String[] Domiciliary = { "groceries", "food", "bills", "car", "family", "whatever" };
         private string getCategoryfromText(int note_id, SqlConnection sqlCon)
         {
-            for (int i=0;i<School.Length;i++) {
-                if (richTextBox1.Text.Contains(School[i])) 
+            for (int i = 0; i < School.Length; i++)
+            {
+                if (richTextBox1.Text.Contains(School[i]))
                 {
-                    
+
                     return "School";
 
                 }
-                
+
 
             }
             for (int i = 0; i < work.Length; i++)
             {
-                if (richTextBox1.Text.Contains(work[i])) 
+                if (richTextBox1.Text.Contains(work[i]))
                 {
                     return "Work";
 
@@ -304,7 +303,7 @@ namespace OneNote
 
             for (int i = 0; i < Domiciliary.Length; i++)
             {
-                if (richTextBox1.Text.Contains(Domiciliary[i])) 
+                if (richTextBox1.Text.Contains(Domiciliary[i]))
                 {
                     return "Domiciliary";
 
@@ -314,7 +313,7 @@ namespace OneNote
 
             return "other";
 
-           
+
 
         }
     }
