@@ -14,6 +14,8 @@ You probably only have to change the Connection String in the code.
 Where ever is SqlConnnection plz change its String.
 I am assuming that you know how to change SqlCon String.
 
+To access Administrator form---> Email = Admin ... Password = 123.
+
 
 # About Code.
     The code may be very rough, but hey it works. I added comments also.
